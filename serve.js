@@ -51,8 +51,8 @@ function proxyAsset(mint, res) {
 
 http.createServer((req, res) => {
   let p = decodeURIComponent(req.url.split('?')[0]);
-  // Proxy: /asset/<mint>
-  const m = p.match(/^\/asset\/([A-Za-z0-9]+)$/);
+  // Proxy: /api/asset/<mint> (mesma rota da serverless function da Vercel)
+  const m = p.match(/^\/api\/asset\/([A-Za-z0-9]+)$/);
   if (m) { proxyAsset(m[1], res); return; }
   if (p === '/') p = '/preview.html';
   const filePath = path.join(ROOT, p);
