@@ -16,37 +16,48 @@ const MIME = {
   '.json': 'application/json',
 };
 
-// Proxy do DAS getAsset — api.mainnet-beta.solana.com bloqueia esse metodo
-// quando chamado de browsers (responde 403 com Origin header). Servidor Node
-// nao tem origin, entao a chamada funciona.
-function proxyAsset(mint, res) {
-  const body = JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'getAsset', params: { id: mint } });
-  const opts = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) },
-  };
-  const req = require('https').request('https://api.mainnet-beta.solana.com', opts, (r) => {
-    let data = '';
-    r.on('data', (c) => data += c);
-    r.on('end', () => {
-      try {
-        const j = JSON.parse(data);
-        const c = j?.result?.content || {};
-        const out = {
-          image: c.links?.image || c.files?.[0]?.uri || null,
-          name:  c.metadata?.name || null,
-          symbol: c.metadata?.symbol || null,
-        };
-        res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=3600' });
-        res.end(JSON.stringify(out));
-      } catch {
-        res.writeHead(502); res.end('{}');
-      }
+// Proxy do RPC publico da Solana — getAsset (DAS) + getTokenSupply.
+// Esses metodos sao bloqueados quando chamados de browsers (403 com Origin
+// header). Servidor Node nao tem origin, entao funcionam.
+function rpcCall(method, params) {
+  return new Promise((resolve) => {
+    const body = JSON.stringify({ jsonrpc: '2.0', id: 1, method, params });
+    const opts = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) },
+    };
+    const r = require('https').request('https://api.mainnet-beta.solana.com', opts, (resp) => {
+      let data = '';
+      resp.on('data', (c) => data += c);
+      resp.on('end', () => {
+        try { resolve(JSON.parse(data).result || null); } catch { resolve(null); }
+      });
     });
+    r.on('error', () => resolve(null));
+    r.write(body);
+    r.end();
   });
-  req.on('error', () => { res.writeHead(502); res.end('{}'); });
-  req.write(body);
-  req.end();
+}
+
+async function proxyAsset(mint, res) {
+  try {
+    const [asset, sup] = await Promise.all([
+      rpcCall('getAsset',       { id: mint }),
+      rpcCall('getTokenSupply', [mint]),
+    ]);
+    const c = (asset && asset.content) || {};
+    const out = {
+      image:    (c.links && c.links.image) || (c.files && c.files[0] && c.files[0].uri) || null,
+      name:     (c.metadata && c.metadata.name)   || null,
+      symbol:   (c.metadata && c.metadata.symbol) || null,
+      supply:   (sup && sup.value && typeof sup.value.uiAmount === 'number') ? sup.value.uiAmount : null,
+      decimals: (sup && sup.value && typeof sup.value.decimals === 'number') ? sup.value.decimals : null,
+    };
+    res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=300' });
+    res.end(JSON.stringify(out));
+  } catch {
+    res.writeHead(502); res.end('{}');
+  }
 }
 
 http.createServer((req, res) => {

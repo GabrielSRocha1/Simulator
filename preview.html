@@ -540,32 +540,20 @@ async function fetchJupiterPrices(mints){
   }catch{ return {}; }
 }
 
-// Supply REAL on-chain via getTokenSupply (funciona de browser, sem proxy).
-// Cacheado por 5min — supply quase nunca muda fora de mint/burn events.
-const supplyCache = {};
-async function fetchSupply(mint){
-  const c = supplyCache[mint];
+// Proxy unificado /api/asset?mint=xxx → { image, name, symbol, supply, decimals }.
+// O RPC publico bloqueia getAsset e getTokenSupply de browser (403). Cache 5min.
+const assetCache = {};
+async function fetchAsset(mint){
+  const c = assetCache[mint];
   if(c && Date.now() - c.ts < 5 * 60 * 1000) return c.v;
-  const res = await rpcCall('getTokenSupply', [mint]);
-  const v = res?.value?.uiAmount;
-  if(typeof v === 'number'){ supplyCache[mint] = { v, ts: Date.now() }; return v; }
-  return null;
-}
-
-// Ícone on-chain via DAS (getAsset). O RPC público da Solana bloqueia esse
-// método quando chamado de browser (403), então usamos o proxy /asset/{mint}
-// servido pelo serve.js local. Em outro host basta proxy equivalente.
-const iconCache = {};
-async function fetchTokenIcon(mint){
-  if(iconCache[mint] !== undefined) return iconCache[mint];
   try{
     const r = await fetch('/api/asset?mint=' + mint);
-    if(!r.ok){ iconCache[mint] = null; return null; }
-    const j = await r.json();
-    iconCache[mint] = j.image || null;
-    return iconCache[mint];
+    if(!r.ok){ assetCache[mint] = { v:null, ts:Date.now() }; return null; }
+    const v = await r.json();
+    assetCache[mint] = { v, ts:Date.now() };
+    return v;
   }catch{
-    iconCache[mint] = null;
+    assetCache[mint] = { v:null, ts:Date.now() };
     return null;
   }
 }
@@ -758,12 +746,11 @@ async function fetchOne(mint){
 }
 
 async function tickPrices(){
-  // Dispara DexScreener + Jupiter + ícones + supply on-chain em paralelo
-  const [dexResults, jupPrices, icons, supplies] = await Promise.all([
+  // DexScreener + Jupiter + /api/asset (DAS + supply on-chain) em paralelo
+  const [dexResults, jupPrices, assets] = await Promise.all([
     Promise.all(ATIVOS.map(a => fetchOne(a.mint))),
     fetchJupiterPrices(ATIVOS.map(a => a.mint)),
-    Promise.all(ATIVOS.map(a => fetchTokenIcon(a.mint))),
-    Promise.all(ATIVOS.map(a => fetchSupply(a.mint))),
+    Promise.all(ATIVOS.map(a => fetchAsset(a.mint))),
   ]);
 
   ATIVOS.forEach((a, i) => {
@@ -780,13 +767,14 @@ async function tickPrices(){
     a.mcap        = live.mcap;
     a.liq         = live.liq;
     a.vol         = live.vol;
-    // Supply: prioridade pro on-chain (getTokenSupply), depois DexScreener
-    a.supply      = (typeof supplies[i] === 'number' && supplies[i] > 0) ? supplies[i] : (live.supply || a.supply);
+    // Supply: prioridade pro on-chain (vem do /api/asset), depois DexScreener
+    const onchainSupply = assets[i] && assets[i].supply;
+    a.supply      = (typeof onchainSupply === 'number' && onchainSupply > 0) ? onchainSupply : (live.supply || a.supply);
     a.circ        = a.supply;
     // Recalcula market cap com a supply real (fdv do DexScreener pode estar errado)
     if(a.price > 0 && a.supply > 0) a.mcap = a.price * a.supply;
     // Prioridade do ícone: arquivo local (a.logo) → DAS on-chain → DexScreener → CDN
-    a.logoUrl     = a.logo || icons[i] || live.logoUrl;
+    a.logoUrl     = a.logo || (assets[i] && assets[i].image) || live.logoUrl;
 
     // VARIAÇÃO % — ordem de preferência:
     // 1) Jupiter Price v3 (mesma fonte que o Solflare usa)

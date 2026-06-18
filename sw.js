@@ -1,6 +1,6 @@
 // Verum Compound Engine — Service Worker
-// Cache do shell estatico + estrategia network-first para APIs (precos sempre atualizados)
-const CACHE = 'verum-v1';
+// Network-first: sempre busca o mais recente; cache so como fallback offline.
+const CACHE = 'verum-v2';
 const SHELL = [
   '/preview.html',
   '/manifest.json',
@@ -26,26 +26,16 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return;
-  const url = new URL(req.url);
 
-  // Recursos do app (mesmo origin): cache-first
-  if (url.origin === self.location.origin) {
-    e.respondWith(
-      caches.match(req).then((hit) => hit || fetch(req).then((res) => {
-        const copy = res.clone();
-        caches.open(CACHE).then((c) => c.put(req, copy));
-        return res;
-      }).catch(() => caches.match('/preview.html')))
-    );
-    return;
-  }
-
-  // APIs externas (DexScreener, Jupiter, RPC, IPFS): network-first com fallback de cache
+  // Network-first para tudo: pega versao mais nova, atualiza cache, e
+  // so devolve do cache se a rede falhar (modo offline).
   e.respondWith(
-    fetch(req).then((res) => {
-      const copy = res.clone();
-      caches.open(CACHE).then((c) => c.put(req, copy));
-      return res;
-    }).catch(() => caches.match(req))
+    fetch(req)
+      .then((res) => {
+        const copy = res.clone();
+        caches.open(CACHE).then((c) => c.put(req, copy)).catch(() => {});
+        return res;
+      })
+      .catch(() => caches.match(req).then((hit) => hit || caches.match('/preview.html')))
   );
 });
