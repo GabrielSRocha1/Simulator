@@ -383,7 +383,7 @@ footer{margin-top:36px;padding:18px 0;border-top:1px solid rgba(255,255,255,.05)
       <div class="card pcard">
         <div class="ptitle">⚙️ Parâmetros da Comunidade</div>
         <div class="pgrid">
-          <div class="param"><label>Novos Investidores/mês</label><input type="number" id="cp-inv" value="100" min="10" oninput="syncR(this,'cr-inv');runComm()"><input type="range" id="cr-inv" value="100" min="10" max="2000" oninput="syncI(this,'cp-inv');runComm()"></div>
+          <div class="param"><label>Novos Investidores/mês</label><input type="number" id="cp-inv" value="100" min="10" max="1000000" oninput="syncR(this,'cr-inv');runComm()"><input type="range" id="cr-inv" value="100" min="10" max="1000000" step="100" oninput="syncI(this,'cp-inv');runComm()"></div>
           <div class="param"><label>Ticket Médio (USD)</label><input type="number" id="cp-ticket" value="500" min="50" oninput="syncR(this,'cr-ticket');runComm()"><input type="range" id="cr-ticket" value="500" min="50" max="5000" oninput="syncI(this,'cp-ticket');runComm()"></div>
           <div class="param"><label>Crescimento da Rede (%/mês)</label><input type="number" id="cp-ng" value="20" min="1" max="100" oninput="syncR(this,'cr-ng');runComm()"><input type="range" id="cr-ng" value="20" min="1" max="100" oninput="syncI(this,'cp-ng');runComm()"></div>
           <div class="param"><label>Período (meses)</label><input type="number" id="cp-months" value="24" min="3" max="60" oninput="syncR(this,'cr-months');runComm()"><input type="range" id="cr-months" value="24" min="3" max="60" oninput="syncI(this,'cp-months');runComm()"></div>
@@ -467,7 +467,8 @@ const ATIVOS = [
     name:'Escoteiro Coin', sym:'ESCT',
     price:0, mcap:0, liq:0, vol:0,
     holders:0, chg:0, supply:0, circ:0,
-    logoUrl:null, hasLive:false,
+    logo:'/public/ESCT.png',          // logo local (sempre vence)
+    logoUrl:'/public/ESCT.png', hasLive:false,
     color:'#00FF9C', bg:'rgba(0,255,156,.12)'
   },
   {
@@ -475,7 +476,8 @@ const ATIVOS = [
     name:'Bode Coin', sym:'BDC',
     price:0, mcap:0, liq:0, vol:0,
     holders:0, chg:0, supply:0, circ:0,
-    logoUrl:null, hasLive:false,
+    logo:'/public/LOGO-BDC.png',
+    logoUrl:'/public/LOGO-BDC.png', hasLive:false,
     color:'#D4AF37', bg:'rgba(212,175,55,.15)'
   },
   {
@@ -483,7 +485,8 @@ const ATIVOS = [
     name:'Brutos Coin', sym:'BRT',
     price:0, mcap:0, liq:0, vol:0,
     holders:0, chg:0, supply:0, circ:0,
-    logoUrl:null, hasLive:false,
+    logo:'/public/BRUTOS.png',
+    logoUrl:'/public/BRUTOS.png', hasLive:false,
     color:'#9B59FF', bg:'rgba(155,89,255,.12)'
   },
 ];
@@ -766,8 +769,8 @@ async function tickPrices(){
     a.vol         = live.vol;
     a.supply      = live.supply || a.supply;
     a.circ        = a.supply;
-    // Prioridade do ícone: DAS on-chain → DexScreener (info.imageUrl) → CDN fallback
-    a.logoUrl     = icons[i] || live.logoUrl;
+    // Prioridade do ícone: arquivo local (a.logo) → DAS on-chain → DexScreener → CDN
+    a.logoUrl     = a.logo || icons[i] || live.logoUrl;
 
     // VARIAÇÃO % — ordem de preferência:
     // 1) Jupiter Price v3 (mesma fonte que o Solflare usa)
