@@ -540,6 +540,18 @@ async function fetchJupiterPrices(mints){
   }catch{ return {}; }
 }
 
+// Supply REAL on-chain via getTokenSupply (funciona de browser, sem proxy).
+// Cacheado por 5min — supply quase nunca muda fora de mint/burn events.
+const supplyCache = {};
+async function fetchSupply(mint){
+  const c = supplyCache[mint];
+  if(c && Date.now() - c.ts < 5 * 60 * 1000) return c.v;
+  const res = await rpcCall('getTokenSupply', [mint]);
+  const v = res?.value?.uiAmount;
+  if(typeof v === 'number'){ supplyCache[mint] = { v, ts: Date.now() }; return v; }
+  return null;
+}
+
 // Ícone on-chain via DAS (getAsset). O RPC público da Solana bloqueia esse
 // método quando chamado de browser (403), então usamos o proxy /asset/{mint}
 // servido pelo serve.js local. Em outro host basta proxy equivalente.
@@ -746,11 +758,12 @@ async function fetchOne(mint){
 }
 
 async function tickPrices(){
-  // Dispara DexScreener + Jupiter + ícones on-chain (DAS) em paralelo
-  const [dexResults, jupPrices, icons] = await Promise.all([
+  // Dispara DexScreener + Jupiter + ícones + supply on-chain em paralelo
+  const [dexResults, jupPrices, icons, supplies] = await Promise.all([
     Promise.all(ATIVOS.map(a => fetchOne(a.mint))),
     fetchJupiterPrices(ATIVOS.map(a => a.mint)),
     Promise.all(ATIVOS.map(a => fetchTokenIcon(a.mint))),
+    Promise.all(ATIVOS.map(a => fetchSupply(a.mint))),
   ]);
 
   ATIVOS.forEach((a, i) => {
@@ -767,8 +780,11 @@ async function tickPrices(){
     a.mcap        = live.mcap;
     a.liq         = live.liq;
     a.vol         = live.vol;
-    a.supply      = live.supply || a.supply;
+    // Supply: prioridade pro on-chain (getTokenSupply), depois DexScreener
+    a.supply      = (typeof supplies[i] === 'number' && supplies[i] > 0) ? supplies[i] : (live.supply || a.supply);
     a.circ        = a.supply;
+    // Recalcula market cap com a supply real (fdv do DexScreener pode estar errado)
+    if(a.price > 0 && a.supply > 0) a.mcap = a.price * a.supply;
     // Prioridade do ícone: arquivo local (a.logo) → DAS on-chain → DexScreener → CDN
     a.logoUrl     = a.logo || icons[i] || live.logoUrl;
 
