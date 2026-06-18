@@ -544,7 +544,7 @@ const iconCache = {};
 async function fetchTokenIcon(mint){
   if(iconCache[mint] !== undefined) return iconCache[mint];
   try{
-    const r = await fetch('/api/asset/' + mint);
+    const r = await fetch('/api/asset?mint=' + mint);
     if(!r.ok){ iconCache[mint] = null; return null; }
     const j = await r.json();
     iconCache[mint] = j.image || null;

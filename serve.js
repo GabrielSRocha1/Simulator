@@ -50,10 +50,15 @@ function proxyAsset(mint, res) {
 }
 
 http.createServer((req, res) => {
-  let p = decodeURIComponent(req.url.split('?')[0]);
-  // Proxy: /api/asset/<mint> (mesma rota da serverless function da Vercel)
-  const m = p.match(/^\/api\/asset\/([A-Za-z0-9]+)$/);
-  if (m) { proxyAsset(m[1], res); return; }
+  const u = new URL(req.url, `http://localhost:${PORT}`);
+  let p = decodeURIComponent(u.pathname);
+  // Proxy: /api/asset?mint=<mint> (mesma rota da serverless function da Vercel)
+  if (p === '/api/asset') {
+    const mint = u.searchParams.get('mint') || '';
+    if (!/^[A-Za-z0-9]{32,44}$/.test(mint)) { res.writeHead(400); res.end('{"error":"invalid mint"}'); return; }
+    proxyAsset(mint, res);
+    return;
+  }
   if (p === '/') p = '/preview.html';
   const filePath = path.join(ROOT, p);
   if (!filePath.startsWith(ROOT)) { res.writeHead(403); res.end(); return; }
