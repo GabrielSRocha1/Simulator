@@ -43,16 +43,16 @@ header{position:sticky;top:0;z-index:100;background:rgba(2,4,10,.95);backdrop-fi
 .logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--gold),var(--gold-l));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px}
 .logo-t1{font-size:13px;font-weight:800}
 .logo-t2{font-size:9px;color:rgba(255,255,255,.4);letter-spacing:.15em;text-transform:uppercase}
-.live-badge{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.7)}
+.live-badge{display:flex;align-items:center;gap:5px;font-size:13px;color:rgba(255,255,255,.7)}
 .live-dot{width:6px;height:6px;border-radius:50%;background:var(--neon);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,255,156,.5)}50%{box-shadow:0 0 0 6px rgba(0,255,156,0)}}
-.net-badge{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:5px 10px;font-size:11px;color:#fff}
+.net-badge{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:5px 10px;font-size:13px;color:#fff}
 
 /* HERO */
 .hero{text-align:center;padding:32px 0 24px}
 .hero-badge{display:inline-flex;align-items:center;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.25);border-radius:100px;padding:5px 14px;font-size:11px;color:var(--gold);font-weight:500;margin-bottom:16px}
 .hero h1{font-size:clamp(24px,4.5vw,46px);font-weight:900;line-height:1.1;margin-bottom:10px}
-.hero p{color:rgba(255,255,255,.75);font-size:13px;max-width:500px;margin:0 auto}
+.hero p{color:rgba(255,255,255,.75);font-size:15px;max-width:560px;margin:0 auto;line-height:1.5}
 
 /* ATIVO SELECTOR — hero section */
 .ativo-selector{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:24px 0 8px}
@@ -62,25 +62,25 @@ header{position:sticky;top:0;z-index:100;background:rgba(2,4,10,.95);backdrop-fi
 .ativo-btn .check{position:absolute;top:8px;right:8px;width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:9px;transition:all .2s}
 .ativo-btn.selected .check{background:var(--gold);border-color:var(--gold);color:#000;font-weight:900}
 .ativo-btn .ab-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;border:1px solid rgba(255,255,255,.15);flex-shrink:0}
-.ativo-btn .ab-name{font-size:13px;font-weight:700;max-width:100%;overflow-wrap:anywhere;word-break:break-word;text-align:center}
-.ativo-btn .ab-sym{font-size:10px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace;max-width:100%;overflow-wrap:anywhere}
-.ativo-btn .ab-price{font-size:12px;font-family:'JetBrains Mono',monospace;font-weight:600;max-width:100%;overflow-wrap:anywhere;word-break:break-all;text-align:center;line-height:1.2}
-.ativo-btn .ab-chg{font-size:10px;font-weight:600;max-width:100%}
+.ativo-btn .ab-name{font-size:15px;font-weight:700;max-width:100%;overflow-wrap:anywhere;word-break:break-word;text-align:center}
+.ativo-btn .ab-sym{font-size:12px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace;max-width:100%;overflow-wrap:anywhere}
+.ativo-btn .ab-price{font-size:14px;font-family:'JetBrains Mono',monospace;font-weight:600;max-width:100%;overflow-wrap:anywhere;word-break:break-all;text-align:center;line-height:1.2}
+.ativo-btn .ab-chg{font-size:12px;font-weight:600;max-width:100%}
 /* Badge estilo Solflare para variação % */
-.pct-badge{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:-.01em;line-height:1;white-space:nowrap}
+.pct-badge{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;letter-spacing:-.01em;line-height:1;white-space:nowrap}
 .pct-badge.up{background:rgba(20,241,149,.12);color:#14F195}
 .pct-badge.down{background:rgba(255,80,80,.12);color:#FF5050}
 .pct-badge.flat{background:rgba(255,255,255,.06);color:rgba(255,255,255,.4)}
 .pct-badge svg{width:9px;height:9px;flex-shrink:0}
-.pct-badge.lg{font-size:14px;padding:5px 11px;gap:5px}
+.pct-badge.lg{font-size:16px;padding:5px 11px;gap:5px}
 .pct-badge.lg svg{width:11px;height:11px}
 .selected-banner{text-align:center;padding:10px;margin-bottom:6px}
-.selected-banner span{font-size:12px;color:var(--gold);background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.25);border-radius:8px;padding:5px 14px}
+.selected-banner span{font-size:14px;color:var(--gold);background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.25);border-radius:8px;padding:5px 14px}
 
 /* NAV */
 nav{display:flex;gap:3px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:4px;margin-bottom:26px;overflow-x:auto}
 nav::-webkit-scrollbar{display:none}
-.nb{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:9px 10px;border-radius:9px;border:none;font-size:11px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;background:none;color:rgba(255,255,255,.6);font-family:'Inter',sans-serif}
+.nb{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:10px 12px;border-radius:9px;border:none;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;background:none;color:rgba(255,255,255,.6);font-family:'Inter',sans-serif}
 .nb:hover{background:rgba(255,255,255,.05);color:#fff}
 .nb.active{background:var(--gold);color:#02040A;font-weight:700;box-shadow:0 0 15px rgba(212,175,55,.3)}
 
@@ -91,35 +91,35 @@ nav::-webkit-scrollbar{display:none}
 .sec-hdr{margin-bottom:20px}
 .sec-badge{font-size:9px;font-weight:700;color:rgba(212,175,55,.7);letter-spacing:.2em;text-transform:uppercase;margin-bottom:3px}
 .sec-hdr h2{font-size:21px;font-weight:800}
-.sec-hdr p{font-size:12px;color:rgba(255,255,255,.7);margin-top:3px}
+.sec-hdr p{font-size:14px;color:rgba(255,255,255,.75);margin-top:5px;line-height:1.5}
 
 /* ATIVO INFO BAR */
 .ativo-bar{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.2);margin-bottom:20px;flex-wrap:wrap}
 .ativo-bar>div{min-width:0;max-width:100%}
-.ab-tag{font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em}
-.ab-val{font-size:clamp(11px,3vw,13px);font-weight:700;font-family:'JetBrains Mono',monospace;overflow-wrap:anywhere;word-break:break-word}
+.ab-tag{font-size:12px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.08em}
+.ab-val{font-size:clamp(13px,3.2vw,15px);font-weight:700;font-family:'JetBrains Mono',monospace;overflow-wrap:anywhere;word-break:break-word}
 .ab-sep{width:1px;height:24px;background:rgba(255,255,255,.1);flex-shrink:0}
 
 /* KPI */
 .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px;margin-bottom:18px}
 .kpi{padding:14px 16px;min-width:0;overflow:hidden}
-.kpi-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:#fff;margin-bottom:7px;opacity:.7;overflow-wrap:anywhere}
-.kpi-val{font-size:clamp(14px,4.2vw,20px);font-weight:700;font-family:'JetBrains Mono',monospace;min-width:0;overflow-wrap:anywhere;word-break:break-word;line-height:1.15}
-.kpi-sub{font-size:10px;color:rgba(255,255,255,.7);margin-top:2px;overflow-wrap:anywhere}
+.kpi-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:#fff;margin-bottom:7px;opacity:.75;overflow-wrap:anywhere}
+.kpi-val{font-size:clamp(16px,4.6vw,23px);font-weight:700;font-family:'JetBrains Mono',monospace;min-width:0;overflow-wrap:anywhere;word-break:break-word;line-height:1.15}
+.kpi-sub{font-size:12px;color:rgba(255,255,255,.75);margin-top:4px;overflow-wrap:anywhere}
 
 /* PARAMS */
 .pcard{padding:18px;margin-bottom:18px}
 .ptitle{font-size:10px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:.15em;margin-bottom:14px}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:14px}
 .param{display:flex;flex-direction:column;gap:5px;min-width:0}
-.param label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#fff;opacity:.85}
-.param input[type=number]{background:rgba(255,255,255,.05);border:1px solid rgba(212,175,55,.25);border-radius:9px;color:#fff;font-family:'JetBrains Mono',monospace;font-size:13px;padding:9px 12px;width:100%;outline:none;transition:all .2s}
+.param label{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:#fff;opacity:.9}
+.param input[type=number]{background:rgba(255,255,255,.05);border:1px solid rgba(212,175,55,.25);border-radius:9px;color:#fff;font-family:'JetBrains Mono',monospace;font-size:15px;padding:10px 12px;width:100%;outline:none;transition:all .2s}
 .param input[type=number]:focus{border-color:rgba(212,175,55,.7);background:rgba(255,255,255,.08);box-shadow:0 0 0 3px rgba(212,175,55,.1)}
 .param input[type=number][readonly]{background:rgba(212,175,55,.05);border-color:rgba(212,175,55,.35);color:var(--gold-l);cursor:default}
 .param input[type=range]{-webkit-appearance:none;appearance:none;height:3px;background:rgba(255,255,255,.12);border-radius:2px;outline:none;margin-top:2px}
 .param input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-l));cursor:pointer;box-shadow:0 0 8px rgba(212,175,55,.5)}
-.pval{font-size:10px;color:rgba(255,255,255,.85);font-family:'JetBrains Mono',monospace;text-align:right}
-.param-readonly-badge{font-size:9px;color:var(--gold);background:rgba(212,175,55,.1);border-radius:4px;padding:1px 6px;align-self:flex-start}
+.pval{font-size:12px;color:rgba(255,255,255,.85);font-family:'JetBrains Mono',monospace;text-align:right}
+.param-readonly-badge{font-size:11px;color:var(--gold);background:rgba(212,175,55,.1);border-radius:4px;padding:2px 7px;align-self:flex-start}
 
 /* CHART */
 .ccard{padding:18px;margin-bottom:18px}
@@ -127,7 +127,7 @@ nav::-webkit-scrollbar{display:none}
 .cwrap{position:relative;height:230px}
 
 /* INSIGHT */
-.insight{padding:11px 14px;border-radius:10px;font-size:11px;line-height:1.6;margin-top:14px}
+.insight{padding:13px 16px;border-radius:10px;font-size:13px;line-height:1.65;margin-top:14px}
 .ig{background:rgba(212,175,55,.05);border:1px solid rgba(212,175,55,.2);color:rgba(255,255,255,.85)}
 .ir{background:rgba(255,71,87,.05);border:1px solid rgba(255,71,87,.2);color:rgba(255,255,255,.85)}
 .in{background:rgba(0,255,156,.04);border:1px solid rgba(0,255,156,.15);color:rgba(255,255,255,.85)}
@@ -139,9 +139,9 @@ nav::-webkit-scrollbar{display:none}
 .sname{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:9px;color:#fff}
 .sc.best .sname{color:var(--gold)}
 .srow{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;gap:6px;flex-wrap:wrap}
-.slbl{font-size:9px;color:rgba(255,255,255,.7);flex-shrink:0}
-.sval{font-size:10px;font-family:'JetBrains Mono',monospace;font-weight:600;color:#fff;text-align:right;overflow-wrap:anywhere;word-break:break-all;min-width:0}
-.sdiff{font-size:10px;font-family:'JetBrains Mono',monospace;font-weight:700;margin-top:7px;padding-top:7px;border-top:1px solid rgba(255,255,255,.07);overflow-wrap:anywhere;word-break:break-word}
+.slbl{font-size:11px;color:rgba(255,255,255,.75);flex-shrink:0}
+.sval{font-size:12px;font-family:'JetBrains Mono',monospace;font-weight:600;color:#fff;text-align:right;overflow-wrap:anywhere;word-break:break-all;min-width:0}
+.sdiff{font-size:12px;font-family:'JetBrains Mono',monospace;font-weight:700;margin-top:7px;padding-top:7px;border-top:1px solid rgba(255,255,255,.07);overflow-wrap:anywhere;word-break:break-word}
 
 /* TOGGLE */
 .tog-row{display:flex;align-items:center;gap:10px;padding:9px;background:rgba(255,255,255,.03);border-radius:9px;border:1px solid rgba(255,255,255,.08);cursor:pointer}
@@ -149,23 +149,23 @@ nav::-webkit-scrollbar{display:none}
 .tog.on{background:var(--gold)}
 .tog-thumb{position:absolute;top:2px;left:2px;width:15px;height:15px;border-radius:50%;background:#fff;transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,.3)}
 .tog.on .tog-thumb{left:21px}
-.tog-lbl{font-size:12px;color:#fff}
+.tog-lbl{font-size:14px;color:#fff}
 
 /* EXPORT */
 .egrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
 .eb{display:flex;flex-direction:column;align-items:center;gap:7px;padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;color:#fff}
 .eb:hover{transform:translateY(-2px)}
-.eb-icon{font-size:20px}
-.eb-lbl{font-size:12px;font-weight:600}
-.eb-sub{font-size:10px;opacity:.7;text-align:center}
+.eb-icon{font-size:22px}
+.eb-lbl{font-size:14px;font-weight:600}
+.eb-sub{font-size:12px;opacity:.75;text-align:center}
 .eg{border-color:rgba(0,255,156,.35);color:var(--neon)}.eg:hover{background:rgba(0,255,156,.08)}
 .egd{border-color:rgba(212,175,55,.35);color:var(--gold)}.egd:hover{background:rgba(212,175,55,.08)}
 .eb2{border-color:rgba(0,212,255,.35);color:var(--blue)}.eb2:hover{background:rgba(0,212,255,.08)}
 .ep{border-color:rgba(155,89,255,.35);color:#9B59FF}.ep:hover{background:rgba(155,89,255,.08)}
 .sum-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:8px}
 .si{background:rgba(255,255,255,.03);border-radius:10px;padding:10px;min-width:0;overflow:hidden}
-.si-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#fff;opacity:.7;margin-bottom:3px;overflow-wrap:anywhere}
-.si-val{font-size:clamp(10px,2.8vw,12px);font-family:'JetBrains Mono',monospace;font-weight:600;overflow-wrap:anywhere;word-break:break-all}
+.si-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#fff;opacity:.75;margin-bottom:4px;overflow-wrap:anywhere}
+.si-val{font-size:clamp(12px,3vw,14px);font-family:'JetBrains Mono',monospace;font-weight:600;overflow-wrap:anywhere;word-break:break-all}
 
 /* GRID */
 .g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
@@ -188,7 +188,7 @@ nav::-webkit-scrollbar{display:none}
 }
 
 /* FOOTER */
-footer{margin-top:36px;padding:18px 0;border-top:1px solid rgba(255,255,255,.05);text-align:center;font-size:10px;color:rgba(255,255,255,.25);line-height:2}
+footer{margin-top:36px;padding:18px 0;border-top:1px solid rgba(255,255,255,.05);text-align:center;font-size:12px;color:rgba(255,255,255,.35);line-height:2}
 
 /* AMBIENT */
 .amb1{position:fixed;top:0;left:50%;transform:translateX(-50%);width:700px;height:300px;background:rgba(212,175,55,.04);filter:blur(100px);pointer-events:none;z-index:0}
@@ -212,7 +212,7 @@ footer{margin-top:36px;padding:18px 0;border-top:1px solid rgba(255,255,255,.05)
         <div class="logo-t2">Compound Engine</div>
       </div>
     </div>
-    <div class="live-badge"><div class="live-dot"></div><span>LIVE</span><span id="clock" class="mono" style="font-size:10px;margin-left:4px"></span></div>
+    <div class="live-badge"><div class="live-dot"></div><span>LIVE</span><span id="clock" class="mono" style="font-size:12px;margin-left:4px"></span></div>
     <div class="net-badge"><div style="width:5px;height:5px;border-radius:50%;background:var(--neon)"></div>Solana</div>
   </div>
 </header>
@@ -291,7 +291,7 @@ footer{margin-top:36px;padding:18px 0;border-top:1px solid rgba(255,255,255,.05)
         <div class="pgrid">
           <div class="param">
             <label>Ativo Selecionado</label>
-            <input type="text" id="sp-ativo" readonly style="background:rgba(212,175,55,.05);border:1px solid rgba(212,175,55,.35);border-radius:9px;color:var(--gold-l);font-family:'JetBrains Mono',monospace;font-size:13px;padding:9px 12px;width:100%;outline:none">
+            <input type="text" id="sp-ativo" readonly style="background:rgba(212,175,55,.05);border:1px solid rgba(212,175,55,.35);border-radius:9px;color:var(--gold-l);font-family:'JetBrains Mono',monospace;font-size:15px;padding:10px 12px;width:100%;outline:none">
           </div>
           <div class="param">
             <label>Preço Atual (auto) <span class="param-readonly-badge">AUTO</span></label>
@@ -356,16 +356,16 @@ footer{margin-top:36px;padding:18px 0;border-top:1px solid rgba(255,255,255,.05)
         <div class="ptitle">⚙️ Parâmetros</div>
         <div class="pgrid">
           <div class="param">
-            <label>Orçamento Total (USD)</label>
-            <input type="number" id="st-budget" value="1000" min="100" oninput="syncR(this,'sr-budget');runStrat()">
-            <input type="range" id="sr-budget" value="1000" min="100" max="10000" oninput="syncI(this,'st-budget');runStrat()">
-            <div class="pval" id="sv-budget">$1,000</div>
+            <label>Orçamento Total (USD) <span class="param-readonly-badge">AUTO</span></label>
+            <input type="number" id="st-budget" value="1200000" readonly style="background:rgba(212,175,55,.05);border:1px solid rgba(212,175,55,.35);border-radius:9px;color:var(--gold-l);font-family:'JetBrains Mono',monospace;font-size:15px;padding:10px 12px;width:100%;outline:none">
+            <div class="pval" id="sv-budget">$1,200,000</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:5px">Inicial × Mensal × Meses (do Simulador)</div>
           </div>
           <div class="param">
-            <label>Projeção (meses)</label>
-            <input type="number" id="st-proj" value="24" min="6" max="120" oninput="syncR(this,'sr-proj');runStrat()">
-            <input type="range" id="sr-proj" value="24" min="6" max="120" oninput="syncI(this,'st-proj');runStrat()">
+            <label>Projeção (meses) <span class="param-readonly-badge">AUTO</span></label>
+            <input type="number" id="st-proj" value="24" readonly style="background:rgba(212,175,55,.05);border:1px solid rgba(212,175,55,.35);border-radius:9px;color:var(--gold-l);font-family:'JetBrains Mono',monospace;font-size:15px;padding:10px 12px;width:100%;outline:none">
             <div class="pval" id="sv-proj">24 meses</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:5px">Período definido no Simulador</div>
           </div>
         </div>
       </div>
@@ -429,7 +429,7 @@ footer{margin-top:36px;padding:18px 0;border-top:1px solid rgba(255,255,255,.05)
         <div class="cwrap" style="height:260px"><canvas id="projChart"></canvas></div>
         <div class="insight ig" style="margin-top:12px">📊 <strong>Disciplina supera intensidade:</strong> Aportes mensais consistentes demonstram o poder dos juros compostos. O crescimento exponencial torna os últimos meses responsáveis pela maior parte do patrimônio.</div>
       </div>
-      <div class="card pcard" style="margin-top:18px"><p class="ptitle" style="color:rgba(255,255,255,.4)">⚖️ AVISO LEGAL</p><p style="font-size:10px;color:rgba(255,255,255,.55);line-height:1.8">Projeções são cenários hipotéticos baseados em premissas matemáticas. NÃO constituem garantia de rentabilidade ou recomendação de investimento. Consulte um profissional financeiro certificado antes de investir.</p></div>
+      <div class="card pcard" style="margin-top:18px"><p class="ptitle" style="color:rgba(255,255,255,.4)">⚖️ AVISO LEGAL</p><p style="font-size:12px;color:rgba(255,255,255,.7);line-height:1.7">Projeções são cenários hipotéticos baseados em premissas matemáticas. NÃO constituem garantia de rentabilidade ou recomendação de investimento. Consulte um profissional financeiro certificado antes de investir.</p></div>
     </div>
   </div>
 
@@ -456,7 +456,7 @@ footer{margin-top:36px;padding:18px 0;border-top:1px solid rgba(255,255,255,.05)
         <div class="ptitle">📋 Resumo — <span id="exp-ativo-name" style="color:var(--gold)">—</span></div>
         <div class="sum-grid" id="exp-summary"></div>
         <div style="margin-top:12px;padding:10px;background:rgba(255,255,255,.02);border-radius:8px">
-          <p style="font-size:9px;color:rgba(255,255,255,.35);line-height:1.9">⚖️ AVISO LEGAL: Ferramenta educacional de simulação financeira. Todas as projeções são cenários hipotéticos e NÃO constituem garantia de rentabilidade, promessa de lucro ou recomendação de investimento. Criptomoedas são ativos de alto risco. Consulte um profissional financeiro antes de investir. Verum Wallet não se responsabiliza por perdas financeiras.</p>
+          <p style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.8">⚖️ AVISO LEGAL: Ferramenta educacional de simulação financeira. Todas as projeções são cenários hipotéticos e NÃO constituem garantia de rentabilidade, promessa de lucro ou recomendação de investimento. Criptomoedas são ativos de alto risco. Consulte um profissional financeiro antes de investir. Verum Wallet não se responsabiliza por perdas financeiras.</p>
         </div>
       </div>
     </div>
@@ -886,7 +886,7 @@ function showAllContent(a){
   const barHTML = (a) => `
     <div style="display:flex;align-items:center;gap:8px;margin-right:8px">
       <div style="width:30px;height:30px;border-radius:50%;background:${a.bg};border:1px solid ${a.color}40;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:${a.color};overflow:hidden">${a.logoUrl?`<img src="${a.logoUrl}" alt="${a.sym}" style="width:100%;height:100%;object-fit:cover" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${a.sym.slice(0,3)}'}))">`:a.sym.slice(0,3)}</div>
-      <div><div style="font-size:13px;font-weight:700;color:${a.color}">${a.name}</div><div style="font-size:9px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">${a.sym}</div></div>
+      <div><div style="font-size:15px;font-weight:700;color:${a.color}">${a.name}</div><div style="font-size:11px;color:rgba(255,255,255,.55);font-family:'JetBrains Mono',monospace">${a.sym}</div></div>
     </div>
     <div class="ab-sep"></div>
     <div><div class="ab-tag">Preço</div><div class="ab-val" style="color:var(--yellow)">${fmtUSD(a.price)}</div></div>
@@ -964,6 +964,14 @@ function runSim(){
   el('pv-monthly').textContent = '$'+mthly.toLocaleString('en-US');
   el('pv-months').textContent  = months+' meses';
   el('pv-growth').textContent  = gv('sp-growth')+'%';
+
+  // Sync Strategy tab inputs from Simulator (Inicial × Mensal × Meses, mesma projeção)
+  const stratBudget = init * mthly * months;
+  const stB = el('st-budget'); if(stB) stB.value = stratBudget;
+  const stP = el('st-proj');   if(stP) stP.value = months;
+  if(el('sv-budget')) el('sv-budget').textContent = '$'+stratBudget.toLocaleString('en-US');
+  if(el('sv-proj'))   el('sv-proj').textContent   = months+' meses';
+  runStrat();
 
   let totalAtivos   = init>0 ? init/price0 : 0;
   let totalInvested = init;
@@ -1134,6 +1142,7 @@ function runProj(){
     let ativos   = price0 > 0 ? init / price0 : 0;
     let invested = init;
     const data   = [];
+    let finalPrice = price0;
 
     for(let m = 1; m <= 120; m++){
       // Preço do ativo no mês m com crescimento mensal mr
@@ -1143,13 +1152,14 @@ function runProj(){
       invested += mthly;
       // Valor total do portfólio = ativos acumulados × preço atual
       const value = ativos * p;
+      if(m === 120) finalPrice = p;
       if(m % 3 === 0 || m === 120){
         data.push({ month: m, value, ativos, invested });
       }
     }
 
     const last = data[data.length - 1];
-    return { ...s, data, fv: last.value, fat: last.ativos };
+    return { ...s, data, fv: last.value, fat: last.ativos, fp: finalPrice };
   });
 
   // Verificação de sanidade: garante ordem crescente
@@ -1157,14 +1167,22 @@ function runProj(){
   const totalInvested = init + mthly * 120;
 
   el('proj-kpis').innerHTML = projData.map(s=>{
-    const mult = s.fv / totalInvested;
+    const mult     = s.fv / totalInvested;
+    const priceMlt = price0 > 0 ? s.fp / price0 : 0;
     return `
     <div class="card kpi" style="border-color:${s.color}30">
-      <div class="kpi-lbl" style="color:${s.color};opacity:1">${s.name} <span style="font-size:8px;opacity:.6">${s.label}</span></div>
+      <div class="kpi-lbl" style="color:${s.color};opacity:1">${s.name} <span style="font-size:10px;opacity:.7">${s.label}</span></div>
       <div class="kpi-val mono" style="color:${s.color}">$${fmtLg(s.fv)}</div>
       <div class="kpi-sub" style="display:flex;justify-content:space-between;margin-top:6px">
         <span style="color:rgba(255,255,255,.7)">${mult.toFixed(0)}x retorno</span>
         <span style="color:${s.color}">${fmtAtv(s.fat)} ${a.sym}</span>
+      </div>
+      <div style="margin-top:10px;padding-top:8px;border-top:1px dashed ${s.color}30">
+        <div style="font-size:11px;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.5px">Preço futuro ${a.sym} (10a)</div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:5px">
+          <span class="mono" style="color:${s.color};font-size:16px;font-weight:700">${fmtUSD(s.fp)}</span>
+          <span style="font-size:12px;color:rgba(255,255,255,.7)">${priceMlt>=1000?fmtLg(priceMlt)+'x':priceMlt.toFixed(1)+'x'} vs hoje</span>
+        </div>
       </div>
     </div>`;
   }).join('');
@@ -1215,6 +1233,17 @@ function updateExport(){
   el('exp-ativo-name').textContent=`${a.name} (${a.sym})`;
   if(!simData.length) return;
   const last=simData[simData.length-1];
+
+  // Preço futuro 10a por cenário — mesmas taxas usadas em runProj()
+  const price0 = a.price;
+  const priceAt120 = annualRate => {
+    const mr = Math.pow(1 + annualRate, 1/12) - 1;
+    return price0 * Math.pow(1 + mr, 120);
+  };
+  const fpCons = priceAt120(0.50);
+  const fpMod  = priceAt120(2.00);
+  const fpAgr  = priceAt120(5.00);
+
   el('exp-summary').innerHTML=[
     {l:'Ativo',v:`${a.name} (${a.sym})`,c:a.color},
     {l:'Preço Atual',v:fmtUSD(a.price),c:'var(--yellow)'},
@@ -1222,6 +1251,9 @@ function updateExport(){
     {l:'Patrimônio Futuro',v:'$'+last.value.toFixed(4),c:'var(--neon)'},
     {l:'Retorno Estimado',v:'+'+(last.pct.toFixed(0))+'%',c:'var(--neon)'},
     {l:'Total Investido',v:'$'+last.invested.toFixed(2),c:'#fff'},
+    {l:'Preço Futuro 10a — Conservador',v:fmtUSD(fpCons),c:'#64748b'},
+    {l:'Preço Futuro 10a — Moderado',  v:fmtUSD(fpMod), c:a.color},
+    {l:'Preço Futuro 10a — Agressivo', v:fmtUSD(fpAgr), c:'#00FF9C'},
     {l:'Período',v:gv('sp-months')+' meses',c:'#fff'},
     {l:'Market Cap',v:'$'+fmtLg(a.mcap),c:a.color},
   ].map(i=>`<div class="si"><div class="si-lbl">${i.l}</div><div class="si-val" style="color:${i.c}">${i.v}</div></div>`).join('');
