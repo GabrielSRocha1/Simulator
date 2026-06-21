@@ -515,6 +515,7 @@ let charts = {};
 // UTILS
 // ==========================================
 const fmtUSD = v => v < 0.001 ? '$'+v.toFixed(8) : v < 1 ? '$'+v.toFixed(6) : '$'+v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4});
+const fmtN   = (v, dec=2) => Number(v).toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec});
 // Badge de variação % no estilo Solflare (pill com tint + seta)
 function pctBadge(chg, size){
   const v = Number(chg) || 0;
@@ -991,10 +992,10 @@ function runSim(){
   if(last){
     el('k-ativos').textContent    = fmtAtv(last.ativos);
     el('k-avgprice').textContent  = fmtUSD(last.invested/last.ativos);
-    el('k-portfolio').textContent = '$'+last.value.toFixed(4);
+    el('k-portfolio').textContent = '$'+fmtN(last.value,4);
     el('k-profit').textContent    = (last.pct>0?'+':'')+last.pct.toFixed(0)+'%';
-    el('k-profit-usd').textContent= '$'+last.profit.toFixed(2);
-    el('sim-insight').innerHTML   = `⚡ Com <strong>$${mthly}/mês</strong> em <strong>${a.name}</strong>, em <strong>${months} meses</strong> você acumula <strong>${fmtAtv(last.ativos)} ${a.sym}</strong> com retorno estimado de <strong>+${last.pct.toFixed(0)}%</strong>.`;
+    el('k-profit-usd').textContent= '$'+fmtN(last.profit,2);
+    el('sim-insight').innerHTML   = `⚡ Com <strong>$${fmtN(mthly,2)}/mês</strong> em <strong>${a.name}</strong>, em <strong>${months} meses</strong> você acumula <strong>${fmtAtv(last.ativos)} ${a.sym}</strong> com retorno estimado de <strong>+${last.pct.toFixed(0)}%</strong>.`;
   }
 
   // Chart
@@ -1015,7 +1016,7 @@ function runSim(){
     ]},
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{labels:{color:'rgba(255,255,255,.8)',font:{size:11}}},
-        tooltip:{backgroundColor:'rgba(6,9,18,.95)',borderColor:'rgba(255,215,0,.4)',borderWidth:1,callbacks:{label:c=>`${c.dataset.label}: $${c.raw.toFixed(4)}`}}},
+        tooltip:{backgroundColor:'rgba(6,9,18,.95)',borderColor:'rgba(255,215,0,.4)',borderWidth:1,callbacks:{label:c=>`${c.dataset.label}: $${fmtN(c.raw,4)}`}}},
       scales:{x:{ticks:{color:'rgba(255,255,255,.5)',font:{size:10}},grid:{color:'rgba(255,255,255,.04)'}},
         y:{ticks:{color:'rgba(255,255,255,.5)',font:{size:10},callback:v=>'$'+fmtLg(v)},grid:{color:'rgba(255,255,255,.04)'}}}}
   });
@@ -1174,7 +1175,7 @@ function runProj(){
       <div class="kpi-lbl" style="color:${s.color};opacity:1">${s.name} <span style="font-size:10px;opacity:.7">${s.label}</span></div>
       <div class="kpi-val mono" style="color:${s.color}">$${fmtLg(s.fv)}</div>
       <div class="kpi-sub" style="display:flex;justify-content:space-between;margin-top:6px">
-        <span style="color:rgba(255,255,255,.7)">${mult.toFixed(0)}x retorno</span>
+        <span style="color:rgba(255,255,255,.7)">${fmtN(mult,0)}x retorno</span>
         <span style="color:${s.color}">${fmtAtv(s.fat)} ${a.sym}</span>
       </div>
       <div style="margin-top:10px;padding-top:8px;border-top:1px dashed ${s.color}30">
@@ -1248,9 +1249,9 @@ function updateExport(){
     {l:'Ativo',v:`${a.name} (${a.sym})`,c:a.color},
     {l:'Preço Atual',v:fmtUSD(a.price),c:'var(--yellow)'},
     {l:'Ativos Acumulados',v:fmtAtv(last.ativos),c:'var(--gold)'},
-    {l:'Patrimônio Futuro',v:'$'+last.value.toFixed(4),c:'var(--neon)'},
+    {l:'Patrimônio Futuro',v:'$'+fmtN(last.value,4),c:'var(--neon)'},
     {l:'Retorno Estimado',v:'+'+(last.pct.toFixed(0))+'%',c:'var(--neon)'},
-    {l:'Total Investido',v:'$'+last.invested.toFixed(2),c:'#fff'},
+    {l:'Total Investido',v:'$'+fmtN(last.invested,2),c:'#fff'},
     {l:'Preço Futuro 10a — Conservador',v:fmtUSD(fpCons),c:'#64748b'},
     {l:'Preço Futuro 10a — Moderado',  v:fmtUSD(fpMod), c:a.color},
     {l:'Preço Futuro 10a — Agressivo', v:fmtUSD(fpAgr), c:'#00FF9C'},
@@ -1314,8 +1315,8 @@ function exportPDF(){
   doc.text('PARÂMETROS DA SIMULAÇÃO', M, 92);
   doc.setDrawColor(212,175,55,0.2); doc.line(M,94,W-M,94);
   const params=[
-    ['Valor Inicial','$'+gv('sp-initial').toFixed(2)],
-    ['Aporte Mensal','$'+gv('sp-monthly').toFixed(2)],
+    ['Valor Inicial','$'+fmtN(gv('sp-initial'),2)],
+    ['Aporte Mensal','$'+fmtN(gv('sp-monthly'),2)],
     ['Período',gv('sp-months')+' meses'],
     ['Crescimento Mensal',gv('sp-growth')+'%/mês'],
     ['Preço Inicial',fmtUSD(a.price)],
@@ -1335,9 +1336,9 @@ function exportPDF(){
   const results=[
     ['Ativos Acumulados',fmtAtv(last.ativos)+' '+a.sym],
     ['Preço Médio de Entrada',fmtUSD(last.invested/last.ativos)],
-    ['Valor do Portfólio','$'+last.value.toFixed(4)],
-    ['Total Investido','$'+last.invested.toFixed(2)],
-    ['Lucro Estimado','$'+last.profit.toFixed(2)],
+    ['Valor do Portfólio','$'+fmtN(last.value,4)],
+    ['Total Investido','$'+fmtN(last.invested,2)],
+    ['Lucro Estimado','$'+fmtN(last.profit,2)],
     ['Retorno Percentual','+'+(last.pct.toFixed(2))+'%'],
   ];
   doc.setFontSize(8);
@@ -1349,7 +1350,7 @@ function exportPDF(){
 
   // Section: Estratégias rápidas
   doc.setFontSize(9); doc.setTextColor(212,175,55);
-  doc.text('COMPARAÇÃO DE ESTRATÉGIAS (com orçamento $'+gv('st-budget')+')', M, 175);
+  doc.text('COMPARAÇÃO DE ESTRATÉGIAS (com orçamento $'+fmtN(gv('st-budget'),2)+')', M, 175);
   doc.line(M,177,W-M,177);
   const budget=gv('st-budget'), proj=gv('st-proj');
   const growth2=gv('sp-growth')/100;
@@ -1420,11 +1421,11 @@ function shareWhatsApp(){
     `💲 Preço atual: ${fmtUSD(a.price)}\n`+
     `📊 Market Cap: $${fmtLg(a.mcap)}\n\n`+
     `*Parâmetros:*\n`+
-    `💰 Inicial: $${gv('sp-initial')} | Mensal: $${gv('sp-monthly')}\n`+
+    `💰 Inicial: $${fmtN(gv('sp-initial'),2)} | Mensal: $${fmtN(gv('sp-monthly'),2)}\n`+
     `⏱️ Período: ${gv('sp-months')} meses | Crescimento: ${gv('sp-growth')}%/mês\n\n`+
     `*Resultado Projetado:*\n`+
     `🎯 ${fmtAtv(last.ativos)} ${a.sym} acumulados\n`+
-    `💎 Patrimônio: $${last.value.toFixed(4)}\n`+
+    `💎 Patrimônio: $${fmtN(last.value,4)}\n`+
     `📈 Retorno: +${last.pct.toFixed(0)}%\n\n`+
     `⚠️ Simulação hipotética. Não constitui recomendação de investimento.\n\n`+
     `🔗 verum-compound-engine.vercel.app`
